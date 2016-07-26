@@ -1,0 +1,27 @@
+body {
+	margin: 0px;
+}
+
+header {
+	border-bottom: 10px solid #F2333A;
+	background-color: #000000;
+	height: 100px;
+	width: auto;
+	margin: 0px auto;
+}
+
+nav {
+	width: 1000px;
+	height: auto;
+	margin: 0px auto;
+	text-align: justify;
+}
+
+#logo {
+	color: white;
+	font-size: 48px;
+	font-family: "Dolce Vita";
+	display: inline-block;
+	vertical-align: middle;
+	text-decoration: none;
+}
