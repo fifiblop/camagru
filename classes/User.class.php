@@ -27,12 +27,8 @@ class User {
 	}
 };
 
-// $fifi = new User("fifi", "fifi@gmail.com", "yupp");
-$polo = new User();
-// $polo->create_user("polo", "polo@gmail.com", "polo");
-if ($polo->user_exists("polo"))
-	echo "yes";
-else
-	echo "no";
+
+$polo->create_user("polo", "polo@gmail.com", "polo");
+
 
 ?>
