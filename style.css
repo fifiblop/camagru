@@ -1,10 +1,13 @@
 body {
-	margin: 0px;
+	margin: 0px auto;
+	background-color: #373737;
+	font-family: "Proxima Nova";
 }
 
+/*---------------------------------Header Style*/
+
 header {
-	border-bottom: 10px solid #F2333A;
-	background-color: #000000;
+	background-color: #f93638;
 	height: 100px;
 	width: auto;
 	margin: 0px auto;
@@ -14,14 +17,142 @@ nav {
 	width: 1000px;
 	height: auto;
 	margin: 0px auto;
-	text-align: justify;
+	line-height: 100px;
 }
 
-#logo {
+nav a {
+	text-decoration: none;
 	color: white;
-	font-size: 48px;
-	font-family: "Dolce Vita";
+	float: right;
+	margin-left: 10px;
+	height: 20px;
+	font-family: "Proxima Nova Alt";
+}
+
+nav a:hover {
+	color: #373737;
+	transition-duration: 0.3s;
+}
+
+.link1:hover {
+	
+}
+/*----------------------------------Error Style*/
+
+.error {
+	width: 100%;
+	height: 30px;
+	background-color: #000000;
+	line-height: 30px;
+	text-align: center;
+	color: #F93638;
+}
+
+/*----------------------------------Footer Style*/
+
+footer {
+	width: 100%;
+	height: 100px;
+	background-color: #f93638;
+	font-family: "Proxima Nova";
+	text-align: center;
+	line-height: 100px;
+	margin-top: 100px;
+	position: fixed;
+}
+
+/*----------------------------------Logo Style*/
+
+#logo {
+	font-family: "OneDirection";
+	text-shadow: 6px 6px #000000;
+	font-size: 70px;
 	display: inline-block;
 	vertical-align: middle;
 	text-decoration: none;
+	color: white;
+	line-height: 100px;
+	float: left;
+}
+
+#logo:hover {
+	text-shadow: 3px 3px #000000;
+	transition-duration: 0.5s;
+}
+
+.user-logo {
+	width: 70px;
+	height: 70px;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-bottom: 20px;
+}
+
+.wrapper {
+	display: grid;
+	margin-top: 10%;
+}
+
+/*-------------------------------------Form Style*/
+
+form {
+	background-color: #FFFFFF;
+	width: 200px;
+	display: inline-block;
+	border-bottom: 5px solid #000000;
+	border-right: 5px solid #000000;
+	border-radius: 4%;
+	padding: 60px;
+	margin: 0px auto;
+	text-align: center;
+}
+
+.champs {
+	margin-bottom: 10px;
+	border: none;
+	width: 90%;
+	font-family: "Proxima Nova Alt";
+	font-size: 20px;
+	text-align: center;
+	border-bottom: 2px solid #f93638;
+}
+
+.champs:hover {
+	
+}
+
+.button-valid {
+	background-color: #f93638;
+	border: none;
+	padding: 10px;
+	border-radius: 4%;
+	color: #373737;
+	font-family: "Proxima Nova";
+	margin-top: 20px;
+	margin-bottom: 0px;
+	width: 110px;
+	height: 50px;
+	font-size: 18px;
+}
+
+.button-valid:hover {
+	color: #FFFFFF;
+}
+
+/*---------------------------Card Class Style*/
+
+.card {
+	width: 300px;
+	height: 300px;
+	text-align: center;
+	display: block;
+}
+
+.card img {
+	height: 170px;
+	width: 300px;
+}
+
+.card .info {
+	font-weight: bold;
 }
