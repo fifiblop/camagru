@@ -28,7 +28,7 @@ class User {
 };
 
 
-$polo->create_user("polo", "polo@gmail.com", "polo");
+// $polo->create_user("polo", "polo@gmail.com", "polo");
 
 
 ?>
