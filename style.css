@@ -1,83 +1,73 @@
-body {
-	margin: 0px auto;
-	background-color: #373737;
-	font-family: "Proxima Nova";
+/*---------------------------------Classic rules*/
+
+ol {
+	margin: 0px;
+	padding: 0px;
 }
 
-/*---------------------------------Header Style*/
+body {
+	margin: 0px auto;
+	background-color: #FFF;
+	font-family: "Montserrat";
+}
+
+/*----------------------------------Header Style*/
 
 header {
-	background-color: #f93638;
+	background-color: #FFF;//#3949AB;
 	height: 100px;
 	width: auto;
 	margin: 0px auto;
+	border-bottom: 4px solid #3949AB;
 }
 
-nav {
+.nav {
 	width: 1000px;
 	height: auto;
 	margin: 0px auto;
 	line-height: 100px;
+	overflow: auto;
 }
 
-nav a {
+.nav a {
 	text-decoration: none;
-	color: white;
-	float: right;
-	margin-left: 10px;
+	color: #3949AB;
 	height: 20px;
-	font-family: "Proxima Nova Alt";
+}
+.nav li {
+	display: inline;
 }
 
-nav a:hover {
-	color: #373737;
-	transition-duration: 0.3s;
+.nav li label {
+	color: #3949AB;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-.link1:hover {
-	
-}
-/*----------------------------------Error Style*/
-
-.error {
-	width: 100%;
-	height: 30px;
-	background-color: #000000;
-	line-height: 30px;
-	text-align: center;
-	color: #F93638;
+.link {
+	float: right;
 }
 
-/*----------------------------------Footer Style*/
-
-footer {
-	width: 100%;
-	height: 100px;
-	background-color: #f93638;
-	font-family: "Proxima Nova";
-	text-align: center;
-	line-height: 100px;
-	margin-top: 100px;
-	position: fixed;
+.link a:hover {
+	border-bottom: 2px solid #3949AB;
 }
 
-/*----------------------------------Logo Style*/
+#logout-icon {
+	width: 25px;
+}
+
+/*------------------------------------Logo Style*/
 
 #logo {
-	font-family: "OneDirection";
-	text-shadow: 6px 6px #000000;
-	font-size: 70px;
-	display: inline-block;
-	vertical-align: middle;
-	text-decoration: none;
-	color: white;
-	line-height: 100px;
+	font-family: "Die Nasty", "OneDirection";
+	color: #3949AB;
+	font-size: 50px;
+	line-height: 80px;
 	float: left;
-}
-
-#logo:hover {
-	text-shadow: 3px 3px #000000;
 	transition-duration: 0.5s;
+	margin-top: 0px;
+	height: inherit;
+	padding: 10px;
 }
 
 .user-logo {
@@ -88,9 +78,47 @@ footer {
 	margin-bottom: 20px;
 }
 
-.wrapper {
-	display: grid;
-	margin-top: 10%;
+#logo:hover {
+	/*animation: move linear 2000ms infinite;*/
+	text-shadow:
+      4px 4px 0 #000000, 
+      3px 3px 0 #000000, 
+      2px 2px 0 #000000, 
+      1px 1px 0 #000000;
+}
+
+/*-------------------------------------Error Style*/
+
+.header-error {
+	width: 100%;
+	height: 30px;
+	background-color: #3949AB;
+	line-height: 30px;
+	text-align: center;
+	color: #FFF;
+}
+
+.form-error {
+	padding: 0px;
+	height: 50px;
+	width: inherit;
+	background-color: black;
+}
+
+/*-------------------------------------Footer Style*/
+
+#footer {
+	width: 100%;
+	background-color: #3949AB;
+	color: #FFFFFF;
+	font-size: 1em;
+	font-weight: lighter;
+	text-align: center;
+	line-height: 40px;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 40px;
 }
 
 /*-------------------------------------Form Style*/
@@ -98,54 +126,78 @@ footer {
 form {
 	background-color: #FFFFFF;
 	width: 200px;
-	display: inline-block;
-	border-bottom: 5px solid #000000;
-	border-right: 5px solid #000000;
-	border-radius: 4%;
+	border: 2px solid #000;
+	border-radius: 2px;
 	padding: 60px;
 	margin: 0px auto;
+	margin-top: 80px;
 	text-align: center;
+	box-shadow:
+            2px 2px #3949AB,
+            4px 4px #3949AB,
+            6px 6px #3949AB;
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
 }
 
 .champs {
-	margin-bottom: 10px;
+	margin-top: 5px;
+	margin-bottom: 15px;
 	border: none;
 	width: 90%;
-	font-family: "Proxima Nova Alt";
 	font-size: 20px;
 	text-align: center;
-	border-bottom: 2px solid #f93638;
+	color: #3949AB;
+	font-weight: bold;
+	border-bottom: 4px solid #3949AB;// *#f93638;
 }
 
-.champs:hover {
-	
+.champs:focus, .champs:hover {
+	background-color: #DDDDDD;
+	border-radius: 2px;
+	transition-duration: 0.5s;
 }
 
 .button-valid {
-	background-color: #f93638;
-	border: none;
+	background-color: #FFFFFF;
+	border: 2px solid #373737;
 	padding: 10px;
-	border-radius: 4%;
-	color: #373737;
-	font-family: "Proxima Nova";
+	border-radius: 2px;
+	color: #3949AB;
 	margin-top: 20px;
 	margin-bottom: 0px;
 	width: 110px;
 	height: 50px;
 	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .button-valid:hover {
+	background-color: #3949AB;
+	border: none;
 	color: #FFFFFF;
+	font-weight: bold;
 }
 
-/*---------------------------Card Class Style*/
+/*--------------------------------------Card Class Style*/
+
+.row {
+	display: table;
+	table-layout: fixed;
+	margin: 0px auto;
+	margin-top: 20px;
+	border-spacing: 20px;
+}
 
 .card {
 	width: 300px;
 	height: 300px;
 	text-align: center;
-	display: block;
+	display: table-cell;
+	margin: 20px auto;
+	border: 2px solid #000;
+    transition-duration: 0.5s;
 }
 
 .card img {
@@ -154,5 +206,68 @@ form {
 }
 
 .card .info {
+	font-weight: bold;
+}
+
+.card:hover
+{
+	box-shadow:
+            2px 2px #3949AB,
+            4px 4px #3949AB,
+            6px 6px #3949AB;
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+    transition-duration: 0.5s;
+}
+
+/*---------------------------------------Camagru Style*/
+
+.camagru {
+	width: 800px;
+	height: 500px;
+	margin: 0px auto;
+	border: 2px solid #000;
+	text-align: center;
+	margin-top: 80px;
+	box-shadow:
+            2px 2px #3949AB,
+            4px 4px #3949AB,
+            6px 6px #3949AB;
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+    display: block;
+}
+
+#video {
+	margin: auto;
+	margin-top: 60px;
+	display: block;
+	border-radius: 2px;
+	border: 4px solid #3949AB;
+	padding: 4px;
+}
+
+#startbutton {
+	background-color: #FFFFFF;
+	border: 2px solid #373737;
+	padding: 10px;
+	border-radius: 2px;
+	color: #3949AB;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	width: 210px;
+	height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	display: block;
+	margin: 0px auto;
+	margin-top: 40px;
+}
+
+#startbutton:hover {
+	background-color: #3949AB;
+	border: none;
+	color: #FFFFFF;
 	font-weight: bold;
 }
