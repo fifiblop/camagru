@@ -1,5 +1,7 @@
 <?php
 
+// http://www.codeproject.com/Articles/1080626/Code-Your-Own-PHP-MVC-Framework-in-Hour
+
 class Framework {
 
 	public static function run() {
