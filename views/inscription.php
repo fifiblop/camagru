@@ -1,8 +1,8 @@
 <?php
 	include("header.php");
 ?>
-	<form action="#" method="post">
-		<!-- <img class="user-logo" src="ressources/user.png"><br> -->
+	<form action="/camagru/actions/register.php" method="post">
+		<label id="form-title">INSCRIPTION</label><br>
 		<label>EMAIL</label><br>
 		<input class="champs" type="text" name="email"><br>
 		<label>LOGIN</label><br>

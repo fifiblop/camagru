@@ -2,7 +2,7 @@
 	include("header.php");
 ?>
 <form action="#" method="post">
-	<!-- <img class="user-logo" src="ressources/user.png"><br> -->
+	<label id="form-title">CONNEXION</label><br>
 	<label>LOGIN</label><br>
 	<input class="champs" type="text" name="login" style="text-transform:uppercase"><br>
 	<label>MOT DE PASSE</label><br>
