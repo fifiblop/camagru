@@ -1,0 +1,327 @@
+$color-one: #1BBC9B;
+$color-two: #3A539B;
+$color-three: #A2DED0;
+
+/*---------------------------------Classic rules*/
+
+ol {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	margin: 0px auto;
+	background-color: #FFF;
+	font-family: "Montserrat";
+}
+
+/*----------------------------------Header Style*/
+
+header {
+	background-color: $color-three;
+	height: 100px;
+	width: auto;
+	margin: 0px auto;
+	border-bottom: 4px solid $color-two;
+}
+
+.nav {
+	width: 1000px;
+	height: auto;
+	margin: 0px auto;
+	line-height: 100px;
+	overflow: auto;
+}
+
+.nav a {
+	text-decoration: none;
+	color: $color-two;
+	height: 20px;
+}
+.nav li {
+	display: inline;
+}
+
+.nav li label {
+	color: $color-two;
+	font-weight: bold;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.link-left {
+	float: left;
+}
+
+.link-right {
+	float: right;
+}
+
+.link-right a:hover {
+	border-bottom: 4px solid $color-one;
+}
+
+#logout-icon {
+	width: 25px;
+}
+
+/*------------------------------------Logo Style*/
+
+#logo {
+	font-family: "Die Nasty";
+	color: $color-one;
+	font-size: 55px;
+	line-height: 80px;
+	float: left;
+	transition-duration: 0.5s;
+	margin-top: 0px;
+	height: inherit;
+	padding: 10px;
+	text-shadow:
+	  4px 4px 0 $color-two, 
+	  3px 3px 0 $color-two, 
+	  2px 2px 0 $color-two, 
+	  1px 1px 0 $color-two;
+}
+
+.logo-icon {
+	height: 60px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.user-logo {
+	width: 70px;
+	height: 70px;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-bottom: 20px;
+}
+
+#logo:hover {
+	/*animation: move linear 2000ms infinite;*/
+	text-shadow: none;
+}
+
+/*-------------------------------------Error Style*/
+
+.header-error {
+	width: 100%;
+	height: 30px;
+	background-color: $color-one;
+	line-height: 30px;
+	text-align: center;
+	color: #FFF;
+}
+
+.form-error {
+	padding: 0px;
+	height: 50px;
+	width: inherit;
+	background-color: black;
+}
+
+/*-------------------------------------Footer Style*/
+
+#footer {
+	width: 100%;
+	background-color: $color-one;
+	color: $color-two;
+	font-size: 1em;
+	font-weight: lighter;
+	text-align: center;
+	line-height: 40px;
+	left: 0px;
+	bottom: 0px;
+	height: 40px;
+	margin-top: 80px;
+}
+
+/*-------------------------------------Form Style*/
+
+form {
+	background-color: #FFF;
+	width: 300px;
+	border: 2px solid $color-two;
+	border-radius: 2px;
+	padding: 60px;
+	margin: 0px auto;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	text-align: center;
+	box-shadow:
+            2px 2px $color-three,
+            4px 4px $color-three,
+            6px 6px $color-three;
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+}
+
+form label {
+	color: $color-two;
+}
+
+#form-title {
+	font-family: "Die Nasty";
+	font-size: 25px;
+	display: block;
+}
+
+.champs {
+	margin-top: 5px;
+	margin-bottom: 15px;
+	border: none;
+	width: 90%;
+	font-size: 20px;
+	text-align: center;
+	color: $color-two;
+	font-weight: bold;
+	border-bottom: 4px solid $color-one;
+	background-color: #C8F7C5;
+}
+
+.champs:focus, .champs:hover {
+	border-radius: 2px;
+	transition-duration: 0.5s;
+}
+
+.button-valid {
+	background-color: #FFF;
+	border: 2px solid $color-two;
+	padding: 10px;
+	border-radius: 2px;
+	color: $color-one;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	width: 110px;
+	height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.button-valid:hover {
+	background-color: $color-one;
+	border: none;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+/*--------------------------------------Card Class Style*/
+
+.row {
+	display: table;
+	table-layout: fixed;
+	margin: 0px auto;
+	border-spacing: 50px;
+}
+
+.card {
+	width: 400px;
+	height: 380px;
+	text-align: center;
+	display: table-cell;
+	border: 2px solid $color-two;
+	border-radius: 2px;
+    transition-duration: 0.5s;
+    background-color: #FFF;
+}
+
+.card img {
+	width: calc(100% - 8px);
+	margin-top: 4px;
+}
+
+.card .info {
+	width: inherit;
+	height: 24px;
+	color: $color-two;
+	padding: 15px;
+	margin-top: 2px;
+	margin-bottom: 0px;
+	background-color: $color-three;
+	text-align: left;
+	line-height: 20px;
+}
+
+.card #user {
+	display: inline-block;
+	text-align: left;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.card .link-right {
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.card .info li {
+	display: inline;
+}
+
+.card:hover
+{
+	box-shadow:
+            1px 1px $color-one,
+            2px 2px $color-one,
+            3px 3px $color-one,
+            4px 4px $color-one,
+            5px 5px $color-one,
+            6px 6px $color-one;
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+    transition-duration: 0.5s;
+}
+
+/*---------------------------------------Camagru Style*/
+
+.camagru {
+	width: 800px;
+	height: 500px;
+	margin: 0px auto;
+	background-color: #FFF;
+	border: 2px solid $color-two;
+	border-radius: 2px;
+	text-align: center;
+	margin-top: 80px;
+	box-shadow:
+            2px 2px $color-one,
+            4px 4px $color-one,
+            6px 6px $color-one;
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+    display: block;
+}
+
+#video {
+	margin: auto;
+	margin-top: 60px;
+	display: block;
+	border-radius: 2px;
+}
+
+#startbutton {
+	background-color: #FFFFFF;
+	border: 2px solid #373737;
+	padding: 10px;
+	border-radius: 2px;
+	color: $color-one;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	width: 210px;
+	height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	display: block;
+	margin: 0px auto;
+	margin-top: 40px;
+}
+
+#startbutton:hover {
+	background-color: $color-one;
+	border: none;
+	color: #FFFFFF;
+	font-weight: bold;
+}
