@@ -94,7 +94,8 @@ header {
   background-color: black; }
 
 /*-------------------------------------Footer Style*/
-#footer {
+footer {
+  position: absolute;
   width: 100%;
   background-color: #1BBC9B;
   color: #3A539B;
@@ -105,7 +106,8 @@ header {
   left: 0px;
   bottom: 0px;
   height: 40px;
-  margin-top: 80px; }
+  margin-top: 80px;
+  margin-bottom: 0px; }
 
 /*-------------------------------------Form Style*/
 form {
@@ -166,6 +168,25 @@ form label {
   color: #FFFFFF;
   font-weight: bold; }
 
+.form-error {
+  display: block;
+  background-color: #E74C3C;
+  color: white;
+  line-height: 50px; }
+
+.form-msg {
+  display: block;
+  background-color: #1BBC9B;
+  color: white;
+  line-height: 50px;
+  margin-top: 10px;
+  margin-bottom: -20px; }
+
+.lost-mail {
+  display: block;
+  margin-top: 30px;
+  font-size: 13px; }
+
 /*--------------------------------------Card Class Style*/
 .row {
   display: table;
@@ -220,7 +241,7 @@ form label {
 /*---------------------------------------Camagru Style*/
 .camagru {
   width: 800px;
-  height: 500px;
+  height: 900px;
   margin: 0px auto;
   background-color: #FFF;
   border: 2px solid #3A539B;

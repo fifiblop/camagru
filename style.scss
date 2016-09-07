@@ -1,6 +1,7 @@
 $color-one: #1BBC9B;
 $color-two: #3A539B;
 $color-three: #A2DED0;
+$color-error: #E74C3C;
 
 /*---------------------------------Classic rules*/
 
@@ -123,7 +124,8 @@ header {
 
 /*-------------------------------------Footer Style*/
 
-#footer {
+footer {
+	position: absolute;
 	width: 100%;
 	background-color: $color-one;
 	color: $color-two;
@@ -135,6 +137,7 @@ header {
 	bottom: 0px;
 	height: 40px;
 	margin-top: 80px;
+	margin-bottom: 0px;
 }
 
 /*-------------------------------------Form Style*/
@@ -205,6 +208,28 @@ form label {
 	border: none;
 	color: #FFFFFF;
 	font-weight: bold;
+}
+
+.form-error {
+	display: block;
+	background-color: $color-error;
+	color: white;
+	line-height: 50px;
+}
+
+.form-msg {
+	display: block;
+	background-color: $color-one;
+	color: white;
+	line-height: 50px;
+	margin-top: 10px;
+	margin-bottom: -20px;
+}
+
+.lost-mail {
+	display: block;
+	margin-top : 30px;
+	font-size: 13px;
 }
 
 /*--------------------------------------Card Class Style*/
@@ -278,7 +303,7 @@ form label {
 
 .camagru {
 	width: 800px;
-	height: 500px;
+	height: 900px;
 	margin: 0px auto;
 	background-color: #FFF;
 	border: 2px solid $color-two;

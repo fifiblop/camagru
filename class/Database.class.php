@@ -22,7 +22,7 @@ class Database {
 			try {
 				$this->pdo = new PDO($dsn, $user, $password);
 				$this->pdo->setAttribute(PDO::ERRMODE_EXCEPTION, PDO::CASE_NATURAL);
-				print("connection successful" . PHP_EOL);
+				// print("connection successful" . PHP_EOL);
 			} catch (PDOException $e) {
 				print("error: " . $e->getMessage() . PHP_EOL);
 			}
@@ -53,11 +53,12 @@ class Database {
 				default:
 					$type = PDO::PARAM_STR;
 			}
+			$this->stmt->bindValue($param, $value, $type);
 		}
 		if (empty($this->stmt)) {
 			return NULL;
 		} else {
-			return $this->stmt->bindValue($param, $value, $type);
+			return $this->stmt;
 		}
 	}
 }

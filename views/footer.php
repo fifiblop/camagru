@@ -1,3 +1,3 @@
-<footer id="footer">
+<footer>
 	PDELEFOS 2016
 </footer>
