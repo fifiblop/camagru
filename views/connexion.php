@@ -22,20 +22,22 @@
 	}
 	ob_flush();
 ?>
-<form action="#" method="post">
-	<label id="form-title">CONNEXION</label><br>
-	<?php if (isset($error)) { ?>
-		<label class="form-error"><?php echo $error ?></label><br>
-	<?php }; ?>
-	<label>LOGIN</label><br>
-	<input class="champs" type="text" name="login" style="text-transform:uppercase" required><br>
-	<label>MOT DE PASSE</label><br>
-	<input class="champs" type="password" name="password" minlength="8" required><br>
-	<input class="button-valid" type="submit" name="valider" value="VALIDER"><br/>
-	<a href="lost.php" class="lost-mail">J'ai perdu mon mot de passe</a>
-</form>
+	<div class="page-wrap">
+		<form action="#" method="post">
+			<label id="form-title">CONNEXION</label><br>
+			<?php if (isset($error)) { ?>
+				<label class="form-error"><?php echo $error ?></label><br>
+			<?php }; ?>
+			<label>LOGIN</label><br>
+			<input class="champs" type="text" name="login" style="text-transform:uppercase" required><br>
+			<label>MOT DE PASSE</label><br>
+			<input class="champs" type="password" name="password" minlength="8" required><br>
+			<input class="button-valid" type="submit" name="valider" value="VALIDER"><br/>
+			<a href="lost.php" class="lost-mail">J'ai perdu mon mot de passe</a>
+		</form>
+	</div>
+	<?php
+		include("footer.php");
+	?>
 </body>
-<?php
-	include("footer.php");
-?>
 </html>

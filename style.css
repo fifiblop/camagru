@@ -3,10 +3,16 @@ ol {
   margin: 0px;
   padding: 0px; }
 
+html {
+  height: 100%;
+  box-sizing: border-box; }
+
 body {
   margin: 0px auto;
   background-color: #FFF;
-  font-family: "Montserrat"; }
+  font-family: "Montserrat";
+  position: relative;
+  min-height: 100%; }
 
 /*----------------------------------Header Style*/
 header {
@@ -75,7 +81,6 @@ header {
   margin-bottom: 20px; }
 
 #logo:hover {
-  /*animation: move linear 2000ms infinite;*/
   text-shadow: none; }
 
 /*-------------------------------------Error Style*/
@@ -93,21 +98,23 @@ header {
   width: inherit;
   background-color: black; }
 
+/*-------------------------------------Body Style*/
+.page-wrap {
+  margin: 0 auto;
+  padding-top: 80px;
+  padding-bottom: 80px; }
+
 /*-------------------------------------Footer Style*/
-footer {
-  position: absolute;
-  width: 100%;
+.site-footer {
   background-color: #1BBC9B;
-  color: #3A539B;
-  font-size: 1em;
-  font-weight: lighter;
   text-align: center;
   line-height: 40px;
-  left: 0px;
-  bottom: 0px;
+  font-weight: lighter;
   height: 40px;
-  margin-top: 80px;
-  margin-bottom: 0px; }
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0; }
 
 /*-------------------------------------Form Style*/
 form {
@@ -117,8 +124,6 @@ form {
   border-radius: 2px;
   padding: 60px;
   margin: 0px auto;
-  margin-top: 80px;
-  margin-bottom: 80px;
   text-align: center;
   box-shadow: 2px 2px #A2DED0, 4px 4px #A2DED0, 6px 6px #A2DED0;
   -webkit-transform: translateX(-6px);
@@ -253,11 +258,43 @@ form label {
   transform: translateX(-6px);
   display: block; }
 
+#video-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 60px; }
+
 #video {
   margin: auto;
-  margin-top: 60px;
   display: block;
-  border-radius: 2px; }
+  border-radius: 2px;
+  position: relative; }
+
+#filter {
+  position: absolute;
+  top: 50px;
+  left: 200px; }
+
+.resizable {
+  background: cyan;
+  position: relative; }
+
+.resizer {
+  width: 10px;
+  height: 10px;
+  background: blue;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize; }
+
+.sticker-select {
+  background-color: #A2DED0;
+  overflow: hidden; }
+
+.sticker-select .sticker {
+  width: 80px;
+  display: inline; }
 
 #startbutton {
   background-color: #FFFFFF;
