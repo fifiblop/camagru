@@ -3,6 +3,21 @@
 	include("header.php");
 
   $stickers_list = scandir("../ressources/stickers");
+
+    define('UPLOAD_DIR', './');
+  if (isset($_POST[source])) {
+    $img = $_POST[source];
+    $img = str_replace('data:image/png;base64,', '', $img);
+    $img = str_replace(' ', '+', $img);
+    $data = base64_decode($img);
+    $name = uniqid();
+    $file = UPLOAD_DIR . $name . '.png';
+    file_put_contents($file, $data);
+    $output = UPLOAD_DIR . uniqid() . "jpg";
+    Image::merge($file , $_POST[sticker_src], $output, $_POST[filter_xpos], $_POST[filter_ypos]);
+    unlink($file);
+    echo $output;
+  }
   ob_flush();
 ?>
 
@@ -10,7 +25,7 @@
   <div id="video-container">
     <video id="video"></video>
   </div>
-  <div class="sticker-select">
+  <div id="sticker-select">
   <?php 
     $path = "../ressources/stickers/";
     foreach ($stickers_list as $stick) {
@@ -23,7 +38,7 @@
  </div>
 	<button id="startbutton">Prendre une photo</button>
 	<canvas id="canvas"></canvas>
-  <img src="" id="photo">
+  <img src="<?= $output ?>" id="photo">
 </div>
 
 <script type="text/javascript">
@@ -83,19 +98,25 @@
     var data = canvas.toDataURL('image/jpg');
     var img = new Image();
     img.src = data; 
-    sticker = document.getElementById("filter");
+    stickers = document.getElementsByClassName("filter");
+    // for (var i = stickers.length - 1; i >= 0; i--) {
+    //   console.log(stickers[i].src);
+    // }
     xhttp = new XMLHttpRequest(); 
     xhttp.open("POST", "../actions/shot.php", true);
     xhttp.onreadystatechange = function (aEvt) {
       if (xhttp.readyState == 4) {
          if(xhttp.status == 200)
-          console.log(xhttp.responseText);
+          // console.log(xhttp.responseText);
+          console.log(<?= $_POST[newimage] ?>);
          else
           dump("Erreur pendant le chargement de la page.\n");
       }
     };
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("source=" + img.src + "&filter_xpos=" + sticker.offsetLeft + "&filter_ypos=" + sticker.offsetTop + "&sticker_src=" + sticker.getAttribute("src"));
+    for (var i = 0; i < stickers.length; i++) {
+      xhttp.send("source=" + img.src + "&filter_xpos=" + stickers[i].offsetLeft + "&filter_ypos=" + stickers[i].offsetTop + "&sticker_src=" + stickers[i].getAttribute("src") + "&filter_w=" + stickers[i].width + "&filter_h=" + stickers[i].height);
+    }
   }
 
   startbutton.addEventListener('click', function(ev){
@@ -105,18 +126,60 @@
 
   //--------------------------------------------------------------------Stickers
 
+  var moving = false;
+
   function addSticker(src) {
-    console.log(src);
-    image = document.createElement("img");
-    image.setAttribute('src', src);
-    image.setAttribute('id', "filter");
-    image.setAttribute('width', 160);
-    image.setAttribute('height', "auto");
-    image.setAttribute('onclick', "init()");
-    vid = document.getElementById("video-container");
-    vid.appendChild(image);
+    if (image = document.getElementById(src)){
+      image.parentNode.removeChild(image);
+      sticker = document.getElementById("sticker-select");
+      for (var i = 0; i < sticker.children.length; i++) {
+        if (sticker.children[i].getAttribute("src") == src)
+          sticker.children[i].setAttribute("class", "sticker");
+      }
+
+    } else {
+      sticker = document.getElementById("sticker-select");
+      for (var i = 0; i < sticker.children.length; i++) {
+        if (sticker.children[i].getAttribute("src") == src)
+          sticker.children[i].setAttribute("class", "sticker selected");
+      }
+      image = document.createElement("img");
+      image.setAttribute('src', src);
+      image.setAttribute('id', src);
+      image.setAttribute('class', "filter");
+      image.setAttribute('width', 80);
+      image.setAttribute('height', "auto");
+      image.setAttribute('onclick', "init()");
+      image.setAttribute('top', video.height / 2);
+      image.setAttribute('left', video.width / 2);
+      image.addEventListener("mousedown", initialClick, true);
+      vid = document.getElementById("video-container");
+      vid.appendChild(image);
+    }
   }
 
+  function move(e){
+    var parent = image.parentElement;
+    var newX = e.clientX - parent.offsetLeft - (image.width / 2);
+    var newY = e.clientY - parent.offsetTop - (image.height / 2);
+    image.style.left = newX + "px";
+    image.style.top = newY + "px";
+  }
+
+  function initialClick(e) {
+
+    if(moving){
+      document.removeEventListener("mousemove", move);
+      moving = !moving;
+      return;
+    }
+    
+    moving = !moving;
+    image = this;
+
+    document.addEventListener("mousemove", move, false);
+
+  }
   //-----------------------------------------------------------redimensionnement 
 
 

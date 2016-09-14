@@ -5,8 +5,6 @@ abstract class User {
 
 	static function createUser($email, $login, $password) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$hash = hash("whirlpool", rand(1, 1000) . $login);
 		$create = $db->query("INSERT INTO user (email, login, password, hash) VALUES(:email, :login, :password, :hash);");
 		$create = $db->bind(":email", $email);
@@ -19,8 +17,6 @@ abstract class User {
 
 	static function activateUser($hash) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("UPDATE user SET active = 1 WHERE hash = :hash;");
 		$create = $db->bind(":hash", $hash);
 		$create->execute();
@@ -28,8 +24,6 @@ abstract class User {
 
 	static function changePassword($password, $hash) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("UPDATE user SET password = :password WHERE hash = :hash;");
 		$create = $db->bind(":password", hash("whirlpool", $password));
 		$create = $db->bind(":hash", $hash);
@@ -38,8 +32,6 @@ abstract class User {
 
 	static function isActive($login) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT active FROM user WHERE login = :login;");
 		$create = $db->bind(":login", $login);
 		$create->execute();
@@ -51,8 +43,6 @@ abstract class User {
 
 	static function loginExist($login) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT login FROM user WHERE login = :login;");
 		$create = $db->bind(":login", $login);
 		$create->execute();
@@ -64,8 +54,6 @@ abstract class User {
 
 	static function emailExist($email) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT email FROM user WHERE email = :email;");
 		$create = $db->bind(":email", $email);
 		$create->execute();
@@ -77,8 +65,6 @@ abstract class User {
 
 	static function getLoginByEmail($email) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT login FROM user WHERE email = :email;");
 		$create = $db->bind(":email", $email);
 		$create->execute();
@@ -90,8 +76,6 @@ abstract class User {
 
 	static function getLoginByHash($hash) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT login FROM user WHERE hash = :hash;");
 		$create = $db->bind(":hash", $hash);
 		$create->execute();
@@ -103,8 +87,6 @@ abstract class User {
 
 	static function getEmailByLogin($login) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT email FROM user WHERE login = :login;");
 		$create = $db->bind(":login", $login);
 		$create->execute();
@@ -116,8 +98,6 @@ abstract class User {
 
 	static function getPasswordByLogin($login) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT password FROM user WHERE login = :login;");
 		$create = $db->bind(":login", $login);
 		$create->execute();
@@ -129,8 +109,6 @@ abstract class User {
 
 	static function getHashByEmail($email) {
 		$db = new Database();
-		$create = $db->query("USE db_camagru");
-		$create->execute();
 		$create = $db->query("SELECT hash FROM user WHERE email = :email;");
 		$create = $db->bind(":email", $email);
 		$create->execute();

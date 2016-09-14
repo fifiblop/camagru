@@ -311,7 +311,7 @@ form label {
 /*---------------------------------------Camagru Style*/
 
 .camagru {
-	width: 800px;
+	width: 500px;
 	height: 900px;
 	margin: 0px auto;
 	background-color: #FFF;
@@ -332,7 +332,6 @@ form label {
 	position: relative;
 	display: inline-block;
 	overflow: hidden;
-	margin-top: 60px;
 }
 
 #video {
@@ -342,14 +341,10 @@ form label {
 	position: relative;
 }
 
-#filter {
+.filter {
 	position: absolute;
 	top: 50px;
 	left: 200px;
-}
-
-#test {
-	
 }
 
 .resizable { 
@@ -367,14 +362,21 @@ form label {
 	cursor: se-resize;
 }
 
-.sticker-select {
+#sticker-select {
 	background-color: $color-three;
-	overflow: hidden;
 }
 
-.sticker-select .sticker {
+#sticker-select .sticker {
 	width: 80px;
 	display: inline;
+	margin: 4px;
+}
+
+.selected {
+	width: 100%;
+	margin: 2px;
+	// border: 2px solid $color-two;
+	background-color: $color-two;
 }
 
 #startbutton {
