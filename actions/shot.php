@@ -13,3 +13,4 @@
 	Image::merge($file , $_POST[sticker_src], $output, $_POST[filter_xpos], $_POST[filter_ypos], $_POST[filter_w], $_POST[filter_h]);
 	unlink($file);
 	$newimage = $output;
+	echo $output;

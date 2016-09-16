@@ -3,28 +3,12 @@
 	include("header.php");
 
   $stickers_list = scandir("../ressources/stickers");
-
-    define('UPLOAD_DIR', './');
-  if (isset($_POST[source])) {
-    $img = $_POST[source];
-    $img = str_replace('data:image/png;base64,', '', $img);
-    $img = str_replace(' ', '+', $img);
-    $data = base64_decode($img);
-    $name = uniqid();
-    $file = UPLOAD_DIR . $name . '.png';
-    file_put_contents($file, $data);
-    $output = UPLOAD_DIR . uniqid() . "jpg";
-    Image::merge($file , $_POST[sticker_src], $output, $_POST[filter_xpos], $_POST[filter_ypos]);
-    unlink($file);
-    echo $output;
-  }
+  if (isset($_GET[image_src]))
+    echo $_GET[image_src];
   ob_flush();
 ?>
 
 <div class="camagru">
-  <div id="video-container">
-    <video id="video"></video>
-  </div>
   <div id="sticker-select">
   <?php 
     $path = "../ressources/stickers/";
@@ -36,9 +20,12 @@
     }
   ?>
  </div>
+  <div id="video-container">
+    <video id="video"></video>
+  </div>
 	<button id="startbutton">Prendre une photo</button>
 	<canvas id="canvas"></canvas>
-  <img src="<?= $output ?>" id="photo">
+  <img id="photo">
 </div>
 
 <script type="text/javascript">
@@ -99,30 +86,41 @@
     var img = new Image();
     img.src = data; 
     stickers = document.getElementsByClassName("filter");
-    // for (var i = stickers.length - 1; i >= 0; i--) {
-    //   console.log(stickers[i].src);
-    // }
-    xhttp = new XMLHttpRequest(); 
-    xhttp.open("POST", "../actions/shot.php", true);
-    xhttp.onreadystatechange = function (aEvt) {
-      if (xhttp.readyState == 4) {
-         if(xhttp.status == 200)
-          // console.log(xhttp.responseText);
-          console.log(<?= $_POST[newimage] ?>);
-         else
-          dump("Erreur pendant le chargement de la page.\n");
+    console.log(stickers.length);
+    if (stickers.length > 0) {
+      xhttp = new XMLHttpRequest(); 
+      xhttp.open("POST", "../actions/shot.php", true);
+      xhttp.onreadystatechange = function (aEvt) {
+        if (xhttp.readyState == 4) {
+           if(xhttp.status == 200) {
+            newImage = xhttp.responseText;
+            displayShot(newImage);
+          }
+        }
+      };
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      var send = "";
+      for (var i = 0; i < stickers.length; i++) {
+        send += "source=" + img.src +
+                "&filter_xpos=" + stickers[i].offsetLeft +
+                "&filter_ypos=" + stickers[i].offsetTop +
+                "&sticker_src=" + stickers[i].getAttribute("src") +
+                "&filter_w=" + stickers[i].width +
+                "&filter_h=" + stickers[i].height;
       }
-    };
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    for (var i = 0; i < stickers.length; i++) {
-      xhttp.send("source=" + img.src + "&filter_xpos=" + stickers[i].offsetLeft + "&filter_ypos=" + stickers[i].offsetTop + "&sticker_src=" + stickers[i].getAttribute("src") + "&filter_w=" + stickers[i].width + "&filter_h=" + stickers[i].height);
+      xhttp.send(send);
     }
   }
 
   startbutton.addEventListener('click', function(ev){
       takepicture();
-    ev.preventDefault();
+    // ev.preventDefault();
   }, false);
+
+  function displayShot(src) {
+    img = document.getElementById('photo');
+    img.setAttribute('src', src);
+  }
 
   //--------------------------------------------------------------------Stickers
 

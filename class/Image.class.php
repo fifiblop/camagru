@@ -5,7 +5,6 @@ abstract class Image {
 		list($width_x, $height_x) = getimagesize($src);
 		list($width_y, $height_y) = getimagesize($sticker);
 
-		echo $stick_h;
 		$image = imagecreatetruecolor($width_x, $height_x);
 
 		$image_x = imagecreatefrompng($src);
