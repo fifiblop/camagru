@@ -1,7 +1,56 @@
 <?php
 require __DIR__ . "/../autoload.php";
 
-abstract class User {
+class User {
+	
+	private $id = NULL;
+	private $login = NULL;
+	private $email = NULL;
+	private $active = NULL;
+	private $hash = NULL;
+	
+	function __construct($login) {
+		$db = new Database();
+		$create = $db->query("SELECT id, email, active, hash FROM user WHERE login = :login");
+		$create = $db->bind(':login', $login);
+		$create->execute();
+		if ($create->rowCount() < 1)
+			return NULL;
+		$array = $create->fetch(PDO::FETCH_ASSOC);
+		$this->id = $array['id'];
+		$this->login =	$login;
+		$this->email = $array['email'];
+		$this->active = $array['active'];
+		$this->hash = $array['hash'];
+	}
+	
+	function getId() {
+		return $this->id;
+	}
+	
+	function getLogin() {
+		return $this->login;
+	}
+	
+	function getHash() {
+		return $this->hash;
+	}
+	
+	function getEmail() {
+		return $this->email;
+	}
+	
+	function getActif() {
+		return $this->active;
+	}
+	
+	function __toString() {
+		$str = 'id : ' . $this->id . PHP_EOL
+		. 'utilisateur : ' . $this->login . PHP_EOL
+		. 'email : ' . $this->email . PHP_EOL
+		. 'actif : ' . $this->active . PHP_EOL;
+		return (string)$str;
+	}
 
 	static function createUser($email, $login, $password) {
 		$db = new Database();
@@ -18,6 +67,14 @@ abstract class User {
 	static function activateUser($hash) {
 		$db = new Database();
 		$create = $db->query("UPDATE user SET active = 1 WHERE hash = :hash;");
+		$create = $db->bind(":hash", $hash);
+		$create->execute();
+	}
+	
+	static function changeEmail($email, $hash) {
+		$db = new Database();
+		$create = $db->query("UPDATE user SET email = :email WHERE hash = :hash;");
+		$create = $db->bind(":email", $email);
 		$create = $db->bind(":hash", $hash);
 		$create->execute();
 	}
@@ -54,7 +111,7 @@ abstract class User {
 
 	static function emailExist($email) {
 		$db = new Database();
-		$create = $db->query("SELECT email FROM user WHERE email = :email;");
+		$create = $db->query("SELECT * FROM user WHERE email = :email;");
 		$create = $db->bind(":email", $email);
 		$create->execute();
 		$count = $create->rowCount();
@@ -67,6 +124,17 @@ abstract class User {
 		$db = new Database();
 		$create = $db->query("SELECT login FROM user WHERE email = :email;");
 		$create = $db->bind(":email", $email);
+		$create->execute();
+		$count = $create->rowCount();
+		if ($count < 1)
+			return false;
+		return $create->fetch()[0];
+	}
+	
+	static function getLoginById($id) {
+		$db = new Database();
+		$create = $db->query("SELECT login FROM user WHERE id = :id;");
+		$create = $db->bind(":id", $id);
 		$create->execute();
 		$count = $create->rowCount();
 		if ($count < 1)

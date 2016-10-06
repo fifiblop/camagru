@@ -2,34 +2,69 @@
   ob_start();
 	include("header.php");
 
+  if ($_SESSION[loggued] == "")
+    header('Location: ../index.php');
   $stickers_list = scandir("../ressources/stickers");
-  if (isset($_GET[image_src]))
-    echo $_GET[image_src];
   ob_flush();
 ?>
-
-<div class="camagru">
-  <div id="sticker-select">
-  <?php 
-    $path = "../ressources/stickers/";
-    foreach ($stickers_list as $stick) {
-      if ($stick[0] != '.') {
-        $stick = $path . $stick;
-        echo "<img class='sticker' onclick='addSticker(\"" . $stick . "\")' src='" . $stick . "'>";
-      }
-    }
-  ?>
- </div>
-  <div id="video-container">
-    <video id="video"></video>
+<div class="page-wrap">
+  <div class="row">
+    <div class="camagru">
+      <div id="sticker-select">
+      <?php 
+        $path = "../ressources/stickers/";
+        foreach ($stickers_list as $stick) {
+          if ($stick[0] != '.') {
+            $stick = $path . $stick;
+            echo "<img class='sticker' onclick='addSticker(\"" . $stick . "\")' src='" . $stick . "'>";
+          }
+        }
+      ?>
+      </div>
+      <div id="video-container">
+        <video id="video"></video>
+      </div>
+    	<!--<form id="file-form" action="upload.php" method="POST">-->
+     <!--   <input type="file" id="file-select" name="photo"/>-->
+     <!--   <button type="submit" id="upload-button">Upload</button>-->
+     <!-- </form>-->
+      <input type="file" onchange="previewFile()"/>
+    	<button id="startbutton" class="hover">Prendre une photo</button>
+    	<canvas id="canvas"></canvas>
+    </div>
+    <div id="roulette">
+      
+    </div>
   </div>
-	<button id="startbutton">Prendre une photo</button>
-	<canvas id="canvas"></canvas>
-  <img id="photo">
 </div>
 
 <script type="text/javascript">
-
+  //--------------------------------------------------------------------Upload
+  
+  function previewFile() {
+    var vidContainer = document.getElementById("video-container");
+    video.style.display = "";
+    if (upload = document.getElementById("upload"))
+      vidContainer.removeChild(upload);    
+    var preview = document.createElement('img');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+    
+    var ext = file.name.split('.').pop();
+    if(ext != "jpeg" && ext != "jpg" && ext != "png")
+      return;
+    reader.addEventListener("load", function () {
+      preview.setAttribute('src', reader.result);
+      preview.setAttribute('id', "upload");
+      preview.setAttribute('width', "500px");
+      video.style.display = "none";
+      vidContainer.appendChild(preview);
+    }, false);
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
   //--------------------------------------------------------------------Webcam
 
   var streaming = false,
@@ -39,9 +74,12 @@
       photo        = document.querySelector('#photo'),
       startbutton  = document.querySelector('#startbutton'),
       yo           = document.querySelector('.sticker'),
+      roulette     = document.querySelector('#roulette'),
       width = 500,
       height = 0;
 
+  disableStartButton(true);
+  
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia ||
@@ -82,11 +120,17 @@
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var data = canvas.toDataURL('image/jpg');
-    var img = new Image();
-    img.src = data; 
+    canvas.style.display = "none";
+    if (video.style.display == "none") {
+      var upload = document.getElementById("upload");
+      var img = new Image();
+      img.src = upload.getAttribute('src'); 
+    } else {
+      var data = canvas.toDataURL('image/jpg');
+      var img = new Image();
+      img.src = data; 
+    }
     stickers = document.getElementsByClassName("filter");
-    console.log(stickers.length);
     if (stickers.length > 0) {
       xhttp = new XMLHttpRequest(); 
       xhttp.open("POST", "../actions/shot.php", true);
@@ -95,19 +139,23 @@
            if(xhttp.status == 200) {
             newImage = xhttp.responseText;
             displayShot(newImage);
+            if (video.style.display == "none") {
+              video.style.display = "";
+              var upload = document.getElementById("upload");
+              var vidContainer = document.getElementById("video-container");
+              vidContainer.removeChild(upload);
+            }
           }
         }
       };
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       var send = "";
-      for (var i = 0; i < stickers.length; i++) {
-        send += "source=" + img.src +
-                "&filter_xpos=" + stickers[i].offsetLeft +
-                "&filter_ypos=" + stickers[i].offsetTop +
-                "&sticker_src=" + stickers[i].getAttribute("src") +
-                "&filter_w=" + stickers[i].width +
-                "&filter_h=" + stickers[i].height;
-      }
+      send += "source=" + img.src +
+              "&filter_xpos=" + stickers[0].offsetLeft +
+              "&filter_ypos=" + stickers[0].offsetTop +
+              "&sticker_src=" + stickers[0].getAttribute("src") +
+              "&filter_w=" + stickers[0].width +
+              "&filter_h=" + stickers[0].height;
       xhttp.send(send);
     }
   }
@@ -118,13 +166,26 @@
   }, false);
 
   function displayShot(src) {
-    img = document.getElementById('photo');
+    img = document.createElement("img");
+    img.setAttribute('class', 'photo');
     img.setAttribute('src', src);
+    roulette.insertBefore(img, roulette.childNodes[0]);
   }
 
+  function disableStartButton(value) {
+    if (value) {
+      startbutton.disabled = value;
+      startbutton.style.backgroundColor = "#7f8c8d";
+      startbutton.style.color = "#bdc3c7";
+      startbutton.setAttribute("class", "");
+    } else {
+      startbutton.disabled = value;
+      startbutton.style.backgroundColor = "white";
+      startbutton.style.color = "#1BBC9B";
+      startbutton.setAttribute("class", "hover");
+    }
+  }
   //--------------------------------------------------------------------Stickers
-
-  var moving = false;
 
   function addSticker(src) {
     if (image = document.getElementById(src)){
@@ -134,8 +195,9 @@
         if (sticker.children[i].getAttribute("src") == src)
           sticker.children[i].setAttribute("class", "sticker");
       }
-
+      disableStartButton(true);
     } else {
+      deleteAllStickers();
       sticker = document.getElementById("sticker-select");
       for (var i = 0; i < sticker.children.length; i++) {
         if (sticker.children[i].getAttribute("src") == src)
@@ -147,19 +209,33 @@
       image.setAttribute('class', "filter");
       image.setAttribute('width', 80);
       image.setAttribute('height', "auto");
-      image.setAttribute('onclick', "init()");
       image.setAttribute('top', video.height / 2);
       image.setAttribute('left', video.width / 2);
       image.addEventListener("mousedown", initialClick, true);
       vid = document.getElementById("video-container");
       vid.appendChild(image);
+      disableStartButton(false);
     }
   }
+  
+  function deleteAllStickers() {
+      vid = document.getElementById("video-container");
+      sticker = document.getElementById("sticker-select");
+      for (var i = 0; i < sticker.children.length; i++) {
+        src = sticker.children[i].getAttribute('src');
+        if (image = document.getElementById(src)) {
+          vid.removeChild(image);
+          sticker.children[i].setAttribute("class", "sticker");
+        }
+      }
+  }
 
+  var moving = false;
+  
   function move(e){
     var parent = image.parentElement;
     var newX = e.clientX - parent.offsetLeft - (image.width / 2);
-    var newY = e.clientY - parent.offsetTop - (image.height / 2);
+    var newY = e.clientY - parent.offsetTop - (image.height / 2) + window.scrollY;
     image.style.left = newX + "px";
     image.style.top = newY + "px";
   }
@@ -178,47 +254,6 @@
     document.addEventListener("mousemove", move, false);
 
   }
-  //-----------------------------------------------------------redimensionnement 
-
-
-  // var p = document.querySelector("#filter");
-
-  // p.addEventListener('click', function init() {
-  //     p.removeEventListener('click', init, false);
-  //     p.className = p.className + 'resizable';
-  //     var resizer = document.createElement('div');
-  //     resizer.className = 'resizer';
-  //     p.appendChild(resizer);
-  //     resizer.addEventListener('mousedown', initDrag, false);
-  //     console.log('init');
-  // }, false);
-
-
-  // var startX, startY, startWidth, startHeight;
-
-  // function initDrag(e) {
-  //     console.log('initDrag');
-  //    startX = e.clientX;
-  //    startY = e.clientY;
-  //    startWidth = parseInt(document.defaultView.getComputedStyle(p).width, 10);
-  //    startHeight = parseInt(document.defaultView.getComputedStyle(p).height, 10);
-  //    document.documentElement.addEventListener('mousemove', doDrag, false);
-  //    document.documentElement.addEventListener('mouseup', stopDrag, false);
-  // }
-
-  // function doDrag(e) {
-  //    p.style.width = (startWidth + e.clientX - startX) + 'px';
-  //    p.style.height = (startHeight + e.clientY - startY) + 'px';
-  //     console.log('doDrag');
-  // }
-
-  // function stopDrag(e) {
-  //     document.documentElement.removeEventListener('mousemove', doDrag, false);
-  //     document.documentElement.removeEventListener('mouseup', stopDrag, false);
-  //     console.log('stopDrag');
-  // }
-
-
 </script>
 <?php
 	include("footer.php");

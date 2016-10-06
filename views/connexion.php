@@ -6,7 +6,9 @@
 	$login = $_POST[login];
 	$password = hash("whirlpool", $_POST[password]);
 	if (!empty($login) && !empty($password)) {
-		if (!User::loginExist($login))
+		if (!Validator::validateLogin($login))
+			$error = "Ce login n'est pas compatible";
+		else if (!User::loginExist($login))
 			$error = "Ce login n'existe pas";
 		else if ($password != User::getPasswordByLogin($login))
 			$error = "Mauvais mot de passe";

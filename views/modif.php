@@ -7,9 +7,13 @@
 	$password = $_POST[password];
 	$hash = $_POST[hash];
 	if (!empty($password) && !empty($hash)) {
-		User::changePassword($password, $hash);
-		$_SESSION[loggued] = User::getLoginByHash($hash);
-		header("Location: ../index.php");
+		if (!Validator::validatePassword($password))
+			$error = "Ce mot de passe est invalide";
+		else {
+			User::changePassword($password, $hash);
+			$_SESSION[loggued] = User::getLoginByHash($hash);
+			header("Location: ../index.php");
+		}
 	}
 	ob_flush();
 ?>

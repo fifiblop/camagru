@@ -6,11 +6,17 @@
 	$login = $_POST[login];
 	$password = $_POST[password];
 	
-	if (!empty($email) && !empty($login) && !empty(password)) {
-		if (User::emailExist($email))
+	if (!empty($email) && !empty($login) && !empty($password)) {
+		if (!Validator::validateEmail($email))
+			$error = "Cet email n'est pas compatible";
+		else if (User::emailExist($email))
 			$error = "Cet email existe déjà";
+		else if (!Validator::validateLogin($login))
+			$error = "Ce login n'est pas compatible";
 		else if (User::loginExist($login))
 			$error = "Ce login existe déjà";
+		else if (!Validator::validatePassword($password))
+			$error = "Ce mot de passe est invalide";
 		else {
 			$hash = User::createUser($email, $login, $password);
 			Mail::sendRegisterMail($email, $hash);
@@ -20,7 +26,7 @@
 			$message = "Validez votre inscription par mail";
 		}
 	}
-	ob_flush();
+ob_flush();
 ?>
 	<div class="page-wrap">
 		<form action="inscription.php" method="post">
