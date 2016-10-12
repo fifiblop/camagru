@@ -40,7 +40,7 @@
 							<li><label>•</label></li>
 							<li><label id="commentaires"><?= Comment::getNbCommentByIdPhoto($image[id]) ?> <i class="fa fa-comment-o" aria-hidden="true"></i></label></li>
 							<li><label>•</label></li>
-							<li><label id="date"><?= $image[date] ?></label></li>
+							<li><label id="date"><?= date('d/m/Y', strtotime($image[date])) ?></label></li>
 						</div>
 					</ol>
 				</div>

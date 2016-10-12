@@ -92,24 +92,20 @@ abstract class Image {
 		$create->execute();
 	}
 	
-	static function merge($src, $sticker, $result, $stick_xpos, $stick_ypos, $stick_w, $stick_h) {
-		list($width_x, $height_x) = getimagesize($src);
+	static function merge($src, $sticker, $output, $stick_xpos, $stick_ypos, $stick_w, $stick_h) {
+		if (strstr($src, "png"))
+			$src = str_replace('data:image/png;base64,', '', $src);
+		else
+			$src = str_replace('data:image/jpeg;base64,', '', $src);
+		$src = str_replace(' ', '+', $src);
+		$src = base64_decode($src);
+		$src = imagecreatefromstring($src);
+		
+		$filter = imagecreatefrompng($sticker);
 		list($width_y, $height_y) = getimagesize($sticker);
-
-		$image = imagecreatetruecolor($width_x, $height_x);
-
-		if (exif_imagetype($src) == 3)
-			$image_x = imagecreatefrompng($src);
-		else if (exif_imagetype($src) == 2)
-			$image_x = imagecreatefromjpeg($src);
-		$image_y = imagecreatefrompng($sticker);
-
-		imagecopy($image, $image_x, 0, 0, 0, 0, $width_x, $height_x);
-		imagecopyresampled($image, $image_y, $stick_xpos, $stick_ypos, 0, 0, $stick_w, $stick_h, $width_y, $height_y);
-
-		imagejpeg($image, $result);
-		imagedestroy($image);
-		imagedestroy($image_x);
-		imagedestroy($image_y);
+		imagecopyresampled($src, $filter, $stick_xpos, $stick_ypos, 0, 0, $stick_w, $stick_h, $width_y, $height_y);
+		
+		imagejpeg($src, $output);
 	}
+
 }

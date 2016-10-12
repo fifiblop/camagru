@@ -24,10 +24,6 @@
       <div id="video-container">
         <video id="video"></video>
       </div>
-    	<!--<form id="file-form" action="upload.php" method="POST">-->
-     <!--   <input type="file" id="file-select" name="photo"/>-->
-     <!--   <button type="submit" id="upload-button">Upload</button>-->
-     <!-- </form>-->
       <input type="file" onchange="previewFile()"/>
     	<button id="startbutton" class="hover">Prendre une photo</button>
     	<canvas id="canvas"></canvas>
