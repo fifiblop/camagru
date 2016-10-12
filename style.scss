@@ -9,24 +9,24 @@ $media-width: 1020px;
 
 @font-face {
 	font-family: "Die Nasty";
-	src: url("/ressources/fonts/die-nasty.ttf");
+	src: url("/camagru/ressources/fonts/die-nasty.ttf");
 }
 
 @font-face {
 	font-family: "Montserrat";
-	src: url("/ressources/fonts/Montserrat-Regular.otf");
+	src: url("/camagru/ressources/fonts/Montserrat-Regular.otf");
 	font-weight: normal;
 }
 
 @font-face {
 	font-family: "Montserrat";
-	src: url("/ressources/fonts/Montserrat-Bold.otf");
+	src: url("/camagru/ressources/fonts/Montserrat-Bold.otf");
 	font-weight: bold;
 }
 
 @font-face {
 	font-family: "Montserrat";
-	src: url("/ressources/fonts/Montserrat-Light.otf");
+	src: url("/camagru/ressources/fonts/Montserrat-Light.otf");
 	font-weight: lighter;
 }
 
@@ -245,6 +245,7 @@ body {
 	margin: 0 auto;
 	padding-top: 60px;
 	padding-bottom: 80px;
+	text-align: center;
 }
 
 /*-------------------------------------Footer Style*/
@@ -842,21 +843,20 @@ body {
 @media screen and (max-width: $media-width) {
 	.camagru {
 		width: 80%;
-		height: 700px;
+		height: 800px;
 		margin-left: auto;
 		margin-right: auto;
 		background-color: #FFF;
 		border: 2px solid $color-two;
 		border-radius: 2px 2px 0px 2px;
 		text-align: center;
-		margin-top: 80px;
+		margin-top: 40px;
 		box-shadow:
-	            2px 2px $color-one,
-	            4px 4px $color-one,
-	            6px 6px $color-one;
+	            2px 0px $color-one,
+	            4px 0px $color-one,
+	            6px 0px $color-one;
 	    -webkit-transform: translateX(-6px);
 	    transform: translateX(-6px);
-	    float: left;
 		overflow: hidden;
 	}
 	
@@ -868,6 +868,8 @@ body {
 	
 	#video {
 		margin: auto;
+		width: 100%;
+		height: auto;
 		display: block;
 		border-radius: 2px;
 		position: relative;
@@ -893,14 +895,13 @@ body {
 	            6px 6px $color-one;
 	    -webkit-transform: translateX(-6px);
 	    transform: translateX(-6px);
-	    margin-top: 80px;
 		margin-left: auto;
 		margin-right: auto;
-	    overflow-y: auto;
+	    overflow-x: auto;
 	}
 	
 	.photo {
-		width: 100%;	
+		height: 100%;	
 	}
 	
 	.filter {

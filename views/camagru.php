@@ -24,7 +24,7 @@
       <div id="video-container">
         <video id="video"></video>
       </div>
-      <input type="file" onchange="previewFile()"/>
+      <input type="file" id="up" onchange="previewFile()"/>
     	<button id="startbutton" class="hover">Prendre une photo</button>
     	<canvas id="canvas"></canvas>
     </div>
@@ -45,6 +45,7 @@
     var preview = document.createElement('img');
     var file    = document.querySelector('input[type=file]').files[0];
     var reader  = new FileReader();
+    var up = document.getElementById('up');
     
     var ext = file.name.split('.').pop();
     if(ext != "jpeg" && ext != "jpg" && ext != "png")
@@ -55,9 +56,14 @@
       preview.setAttribute('width', "500px");
       video.style.display = "none";
       vidContainer.appendChild(preview);
+      up.value = "";
     }, false);
   
     if (file) {
+      if (file.size > 400000) {
+        up.value = "";
+        return;
+      }
       reader.readAsDataURL(file);
     }
   }

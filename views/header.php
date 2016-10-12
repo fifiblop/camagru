@@ -7,27 +7,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Camagru</title>
-	<link rel="stylesheet" type="text/css" href="/style.css">
-	<link rel="stylesheet" href="/ressources/font-awesome-4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/camagru/style.css">
+	<link rel="stylesheet" href="/camagru/ressources/font-awesome-4.6.3/css/font-awesome.min.css">
 </head>
 <body>
 <header>
 	<div class="nav">
 		<ol>
 			<div class="link-left">
-				<li><a id="logo" href="/">CAMAGRU</a></li>
+				<li><a id="logo" href="/camagru/index.php">CAMAGRU</a></li>
 			</div>
 			<div class="link-right">
 			<?php if ($_SESSION[loggued] == "") { ?>
-				<li><a href="/views/inscription.php">S'INSCRIRE</a></li>
+				<li><a href="/camagru/views/inscription.php">S'INSCRIRE</a></li>
 				<li><label>|</label></li>
-				<li><a href="/views/connexion.php">SE CONNECTER</a></li>
+				<li><a href="/camagru/views/connexion.php">SE CONNECTER</a></li>
 			 <?php } else { ?>
-				<li><a href="/views/home.php"><i class="fa fa-user" aria-hidden="true"></i> <?= strtoupper($_SESSION[loggued]) ?></a></li>
+				<li><a href="/camagru/views/home.php"><i class="fa fa-user" aria-hidden="true"></i> <?= strtoupper($_SESSION[loggued]) ?></a></li>
 				<li><label>|</label></li>
-				<li><a href="/views/camagru.php">MONTAGE</a></li>
+				<li><a href="/camagru/views/camagru.php">MONTAGE</a></li>
 				<li><label>|</label></li>
-				<li><a href="/actions/logout.php">DÉCONNEXION</a></li>
+				<li><a href="/camagru/actions/logout.php">DÉCONNEXION</a></li>
 			 <?php } ?>
 			</div>
 		</ol>

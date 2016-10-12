@@ -27,7 +27,7 @@
 						echo '<div class="row">';
 					}
 		?>
-			<a href="/views/image.php?id=<?= $image[id] ?>" class="card-link"><div class="card">
+			<a href="/camagru/views/image.php?id=<?= $image[id] ?>" class="card-link"><div class="card">
 				<img src="<?= $image[src] ?>">
 				<div class="info">
 					<ol>
@@ -58,7 +58,7 @@
 					if ($i == $currentPage)
 						echo '<span class="current-page">' . $i . '</span> ';
 					else
-						echo '<a href="/?page=' . $i .'">' . $i . '</a> ';
+						echo '<a href="/camagru/index.php?page=' . $i .'">' . $i . '</a> ';
 				}
 				echo '</div>';
 			}

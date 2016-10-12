@@ -13,7 +13,7 @@
 		    Likes::deleteLikesById($image[0][id]);
 		    Comment::deleteCommentsById($image[0][id]);
 		    Image::deleteImageById($image[0][id]);
-		    header('Location: /../views/home.php');
+		    header('Location: ../views/home.php');
 	    }
 	} else {
 	  header('Location: ../index.php');  

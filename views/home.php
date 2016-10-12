@@ -22,8 +22,8 @@
                 echo '<div id="profil-gallery">';
                 foreach($image_list as $image) {
                     echo '<div class="profil-img-container">';
-                    echo '<a href="/views/image.php?id=' . $image[id] . '"><img class="profil-images" src="' . $image[src] . '"></a>';
-                    echo '<a href="/actions/delete.php?id=' . $image[id] . '"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+                    echo '<a href="/camagru/views/image.php?id=' . $image[id] . '"><img class="profil-images" src="' . $image[src] . '"></a>';
+                    echo '<a href="/camagru/actions/delete.php?id=' . $image[id] . '"><i class="fa fa-trash" aria-hidden="true"></i></a>';
                     echo '</div>';
                 }
                 echo '</div>';
